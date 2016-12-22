@@ -47,13 +47,4 @@ class ArticleController extends BaseController
 
         dd($body);
     }
-
-    public function writeComments($id, Request $request)
-    {
-        $response = $this->client->request('POST','article/'.$id.'/comment',[
-            'body' => $request->all(),
-        ]);
-
-        return true;
-    }
 }

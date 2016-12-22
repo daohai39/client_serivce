@@ -25,7 +25,7 @@
 
 			<hr>
 			<form class="commentBox">
-				 <div class="form-group" method="post">
+				 <div class="form-group" method="POST" action="http://news.dev/api/v1/article/{{ $article->id}}/comment'">
 				    <label for="exampleInputName2">Name</label>
 				    <input type="text" class="form-control" name="author" placeholder="Your name">
 				  </div>
@@ -53,9 +53,9 @@
 			<div class="side-bar">
 				<h3>Related articles</h3>
 				<ul>
-					@foreach($article->relates->data as $article)
+					@foreach($article->relates->data as $related_article)
 						<li>
-							<a href="{{ route('article.show', $article->id) }}">{{ $article->title}} </a>
+							<a href="{{ route('article.show', $related_article->id) }}">{{ $related_article->title}} </a>
 						</li>
 					@endforeach
 				</ul>
@@ -96,7 +96,7 @@
    			$.ajax({
    				type: 'POST',
    				url: 'http://news.dev/api/v1/article/{{ $article->id}}/comment',
-   				data:data,
+   				data: data,
    				success: function (data)
    				{
    					if (data == 'false')
@@ -111,3 +111,8 @@
 
 </script>
 @endpush
+
+
+<!-- 
+-- Wrong id when comment???
+ -->
