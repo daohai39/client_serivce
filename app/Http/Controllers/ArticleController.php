@@ -10,7 +10,7 @@ class ArticleController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page=null)
+    public function index()
     {   
           $response = $this->client->request('GET','article');
         $body = json_decode($response->getBody());
@@ -39,4 +39,21 @@ class ArticleController extends BaseController
         return view('frontend.article.show', compact('article'));
     }
 
+      public function comments($id)
+    {
+        $response = $this->client->request('GET','article/'.$id.'/comment');
+        
+        $body = json_decode($response->getBody());
+
+        dd($body);
+    }
+
+    public function writeComments($id, Request $request)
+    {
+        $response = $this->client->request('POST','article/'.$id.'/comment',[
+            'body' => $request->all(),
+        ]);
+
+        return true;
+    }
 }

@@ -87,7 +87,6 @@
            		 return false;
       		 }
          
-        //kiem tra xem da nhap mat khau chua
 	        if(content == ''){
 	            alert('Please enter content');
 	            return false;
