@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'ArticleController@index');
+Route::get('/',[ 'as' => 'index', 'uses' => 'ArticleController@index']);
+Route::get('/page/{page}', [ 'as' => 'page', 'uses' => 'ArticleController@index']);
 Route::resource('article','ArticleController',['only'=>['show']]);
 Route::resource('category','CategoryController',['only'=>['show']]);
 Route::resource('tag','TagController',['only'=>['show']]);

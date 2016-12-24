@@ -14,14 +14,5 @@
 		</div>
 	@endforeach
 
-	<nav>
-	 <ul class="pager">
-	 	<li>
-	 		<a href="{{$meta->pagination->links->previous or null}}">Previous</a>
-	 	</li>
-	 	<li>
-	 		<a href="{{$meta->pagination->links->next or null}}">Next</a>
-	 	</li>
-	 </ul>
-	</nav>
+	@include('frontend._partials.pagination')
 @endsection

@@ -10,14 +10,33 @@ class ArticleController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
+    public function index($page = null)
+    {   if(!$page)
           $response = $this->client->request('GET','article');
+        else
+          $response = $this->client->request('GET','article?page='.$page);
         $body = json_decode($response->getBody());
         $articles = $body->data;
 
-        $meta = $body->meta;
-        return view('frontend.article.index',compact('articles','meta'));
+        $meta = $body->meta->pagination;
+        $pages = [
+            'previous' => null,
+            'next' => null,
+        ];
+        if($meta->current_page > 1 && $meta->current_page < 7)
+        {
+            $pages['previous'] = $meta->current_page - 1;
+            $pages['next'] = $meta->current_page + 1;
+        }
+        else if($meta->current_page == 1)
+        {
+            $pages['next'] = $meta->current_page + 1;
+        }    
+        else if ($meta->current_page == 7)
+        {
+            $pages['previous'] = $meta->current_page - 1;
+        }
+        return view('frontend.article.index',compact('articles','pages'));
     }
 
 

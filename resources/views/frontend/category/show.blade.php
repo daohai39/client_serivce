@@ -13,4 +13,5 @@
 			<p><a href="{{ route('article.show',$article->id) }}">See more</a></p>
 		</div>
 	@endforeach
+
 @endsection
